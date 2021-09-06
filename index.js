@@ -12,24 +12,44 @@ var outputBox=document.getElementById("output-box");
 // var submitBtn=document.querySelector("#submit-btn");
 // var outputBox=document.querySelector("#output-box");
 
+function submitHandler(){
+  var ip=Number(initialPrice.value);
+  var cp=Number(currentPrice.value);
+  var sq=Number(stockQuantity.value);
+  calculateProfitAndLoss(ip, sq, cp);
+}
+submitBtn.addEventListener('click',submitHandler);
+
+ function showOutput(message){
+    outputBox.innerHTML=message;
+ }
+
 function calculateProfitAndLoss(initial, quantity, current)
 {
     if(initial>current){
     var loss=(initial-current)*quantity;
     var lossPercent=loss/initial*100;
-    console.log(`Hey Loss is ${loss} and lossPercent is ${lossPercent}%`);
+    showOutput(`Hey Loss is ${loss} and lossPercent is ${lossPercent}%`);
+    outputBox.style.color="red";
+   
     }
 
     else if(current>initial){
     var profit=(current-initial)*quantity;
     var profitPercent=profit/initial*100;
-    console.log(`Hey Profit is ${profit} and profitPercent is ${profitPercent}%`);
+    showOutput(`Hey Profit is ${profit} and profitPercent is ${profitPercent}%`);
+    outputBox.style.color="green";
     }
 
-    else
-    console.log(`Hey no loss no pain and no gain no pain`);
+    else{
+    showOutput(`Hey no pain no gain and no gain no pain`);
+    outputBox.style.color="grey";
+    }
 
 }
 // calculateProfitAndLoss(100,100,10) providing the inputs manually to calculate profit/loss
+
+
+
 
 
